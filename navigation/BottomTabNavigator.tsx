@@ -10,9 +10,13 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import Home from '../screens/Home';
+import Matches from '../screens/Matches';
+import Messages from '../screens/Messages';
+import Profile from '../screens/Profile';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { PRIMARY_COLOR, DARK_GRAY, BLACK, WHITE } from "./../assets/styles";
+import TabBarIcon from "./../components/TabBarIcon";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -21,31 +25,87 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      initialRouteName="Home"
+      tabBarOptions={{ showLabel: false,
+        activeTintColor: PRIMARY_COLOR,
+        inactiveTintColor: DARK_GRAY,
+        labelStyle: {
+          fontSize: 14,
+          textTransform: "uppercase",
+          paddingTop: 10,
+        },
+        style: {
+          backgroundColor: WHITE,
+          borderTopWidth: 0,
+          height: 100, 
+          marginBottom: 0,
+          shadowOpacity: 0.05,
+          shadowRadius: 10,
+          shadowColor: BLACK,
+          shadowOffset: { height: 0, width: 0 },
+        }, }}>
+
+
       <BottomTab.Screen
         name="TabOne"
-        component={TabOneNavigator}
+        component={Home}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon iconName="search" color={color} text="Explore" />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Matches"
+        component={Matches}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon
+              focused={focused}
+              iconName="heart"
+              text="Matches"
+            />
+          ),
         }}
       />
+
+
+<BottomTab.Screen
+        name="Chat"
+        component={Messages}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon
+              focused={focused}
+              iconName="chatbubble"
+              text="Chat"
+            />
+          ),
+        }}
+      />
+
+
+
+
+<BottomTab.Screen
+         name="Profile"
+         component={Profile}
+         options={{
+           tabBarIcon: ({ focused }) => (
+             <TabBarIcon
+               focused={focused}
+               iconName="person"
+               text="Profile"
+             />
+           ),
+         }}
+      />
+
     </BottomTab.Navigator>
   );
 }
 
-// You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
-function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
-}
+
+
+
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
