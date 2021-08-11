@@ -12,8 +12,11 @@ const City = () =>
         </TouchableOpacity>
     )
 
-
 export default City
+
+
+//finction
+
 
 const styles = StyleSheet.create({
     city: {
