@@ -3,7 +3,7 @@
 </h3>
 
 <p align="center">
-	<img src="https://github.com/sambulosenda/Expo-Tinder/blob/main/screenshots/main.jpg" width="300">
+	<img src="https://github.com/sambulosenda/Expo-Tinder/blob/main/screenshots/main.jpg" width="100%">
 </p>
 
 
